@@ -17,7 +17,7 @@ class MenuController extends Controller
 
         foreach ($items as $item) {
             $tag = Tag::where('id', $item->tag_id)->first();
-            $item->tag_name = $tag->tag_name;
+            $item->tag_name = $tag->name;
         }
 
         return response()->json([
@@ -61,6 +61,63 @@ class MenuController extends Controller
         $url = Storage::disk('s3')->url($path);
 
         return $url;
+    }
+
+
+    public function show($menu)
+    {
+        $item = Menu::find($menu);
+
+        $tag = Tag::find($item->tag_id);
+        $item->tag_name = $tag->name;
+
+        if ($item) {
+            return response()->json(['data' => $item], 201);
+        } else {
+            return response()->json(['message' => 'エラーです'], 404);
+        }
+    }
+
+
+    public function update(Request $request, $id)
+    {
+        if ($request->image) {
+            $url = $this->upload($request);
+            $update = [
+                'name' => $request->name,
+                'discription' => $request->discription,
+                'tag_id' => $request->tag_id,
+                'price' => $request->price,
+                'image' => $url
+            ];
+        } else {
+            $update = [
+                'name' => $request->name,
+                'discription' => $request->discription,
+                'tag_id' => $request->tag_id,
+                'price' => $request->price,
+            ];
+        }
+
+        $item = Menu::find($id)->update($update);
+
+
+        if ($item) {
+            return response()->json(['data' => $item], 201);
+        } else {
+            return response()->json(['message' => '変更に失敗しました'], 404);
+        }
+    }
+
+
+    public function destroy(Request $request)
+    {
+        $item = Menu::where('id', $request->id)->delete();
+        if ($item) {
+            return response()->json(['message' => 'メニューを削除しました'], 201);
+        } else {
+            return response()->json(['message' => 'メニューを削除できませんでした'], 404);
+        }
     }
 
 }
