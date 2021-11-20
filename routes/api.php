@@ -1,8 +1,9 @@
 <?php
 
-use App\Http\Controllers\AuthController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\MenuController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,4 +19,9 @@ use Illuminate\Support\Facades\Route;
 Route::group(['prefix' => 'v1'], function() {
     Route::post('/register', [AuthController::class, 'register']);
     Route::post('/login', [AuthController::class, 'login']);
+
+    // menu
+    Route::get('/menu', [MenuController::class, 'index']);
+    Route::post('/menu', [MenuController::class, 'store']);
+    Route::post('/menu/upload', [MenuController::class, 'upload']);
 });

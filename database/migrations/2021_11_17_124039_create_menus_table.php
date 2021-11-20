@@ -17,7 +17,7 @@ class CreateMenusTable extends Migration
             $table->id();
             $table->string('name');
             $table->string('discription');
-            $table->tinyInteger('price');
+            $table->integer('price');
             $table->string('image');
             $table->unsignedBigInteger('tag_id');
             $table->timestamps();
