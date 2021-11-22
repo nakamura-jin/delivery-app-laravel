@@ -6,6 +6,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\OrderController;
 
 
 /*
@@ -33,18 +34,22 @@ Route::group(['prefix' => 'v1'], function() {
 
     // user
     Route::get('/user_list', [UserController::class, 'userList']);
-    Route::get('/user/{id}', [UserController::class, 'show']);
-    Route::put('/user/{id}', [UserController::class, 'update']);
+    // Route::get('/user/{id}', [UserController::class, 'show']);
+    // Route::put('/user/{id}', [UserController::class, 'update']);
 
-    Route::get('/member', [UserController::class, 'index']);
-    Route::get('/member/{id}', [UserController::class, 'show']);
-    Route::put('/member/{id}', [UserController::class, 'update']);
-    Route::delete('/member/{id}', [UserController::class, 'destroy']);
+    // Route::get('/member', [UserController::class, 'index']);
+    // Route::get('/member/{id}', [UserController::class, 'show']);
+    // Route::put('/member/{id}', [UserController::class, 'update']);
+    // Route::delete('/member/{id}', [UserController::class, 'destroy']);
 
     // cart
     Route::get('/{id}/cart', [CartController::class, 'userCart']);
     Route::post('/cart', [CartController::class, 'store']);
     Route::delete('/cart/{id}', [CartController::class, 'destroy']);
+
+    // order
+    Route::get('/order', [OrderController::class, 'index']);
+    Route::post('/{id}/order', [OrderController::class, 'create']);
 
 
 });
