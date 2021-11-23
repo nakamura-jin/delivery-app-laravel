@@ -50,6 +50,8 @@ Route::group(['prefix' => 'v1'], function() {
     // order
     Route::get('/order', [OrderController::class, 'index']);
     Route::post('/{id}/order', [OrderController::class, 'create']);
+    Route::put('/order/{id}', [OrderController::class, 'update']);
+    Route::put('/order/list/{id}', [OrderController::class, 'listDelete']);
 
 
 });
