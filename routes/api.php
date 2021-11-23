@@ -53,5 +53,8 @@ Route::group(['prefix' => 'v1'], function() {
     Route::put('/order/{id}', [OrderController::class, 'update']);
     Route::put('/order/list/{id}', [OrderController::class, 'listDelete']);
 
+    Route::put('/order/cooked/{id}', [OrderController::class, 'cooked']);
+
+
 
 });

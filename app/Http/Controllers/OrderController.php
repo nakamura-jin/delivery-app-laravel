@@ -114,4 +114,20 @@ class OrderController extends Controller
             return response()->json(['message' => '変更に失敗しました'], 404);
         }
     }
+
+
+    public function cooked(Request $request, $id)
+    {
+        $update = [
+            'cooked' => $request->cooked,
+        ];
+
+        $item = Order::find($id)->update($update);
+
+        if ($item) {
+            return response()->json(['data' => $item], 201);
+        } else {
+            return response()->json(['message' => '変更に失敗しました'], 404);
+        }
+    }
 }
