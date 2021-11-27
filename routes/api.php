@@ -33,8 +33,9 @@ Route::group(['prefix' => 'v1'], function() {
     Route::delete('/menu/{id}', [MenuController::class, 'destroy']);
 
     // user
-    Route::get('/user_list', [UserController::class, 'userList']);
-    // Route::get('/user/{id}', [UserController::class, 'show']);
+    // Route::get('/user_list', [UserController::class, 'userList']);
+    Route::get('/user/{id}', [UserController::class, 'show']);
+    Route::get('/user', [UserController::class, 'index']);
     // Route::put('/user/{id}', [UserController::class, 'update']);
 
     // Route::get('/member', [UserController::class, 'index']);
@@ -46,6 +47,7 @@ Route::group(['prefix' => 'v1'], function() {
     Route::get('/{id}/cart', [CartController::class, 'userCart']);
     Route::post('/cart', [CartController::class, 'store']);
     Route::delete('/cart/{id}', [CartController::class, 'destroy']);
+    Route::delete('/cart/user/{id}', [CartController::class, 'allDelete']);
 
     // order
     Route::get('/order', [OrderController::class, 'index']);

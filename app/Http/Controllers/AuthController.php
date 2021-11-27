@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
+use App\Models\Owner;
 
 class AuthController extends Controller
 {
@@ -14,33 +15,51 @@ class AuthController extends Controller
         $validate = Validator::make($request->all(), [
             'name' => 'required',
             'email' => 'required|email',
-            'password' => 'required',
-            'role_id' => 'required'
+            // 'password' => 'required',
+            'role_id' => 'required',
+            'uid' => 'required'
         ]);
 
         if ($validate->fails()) {
             return response()->json(['message' => '登録に失敗しました']);
         }
 
-
-        $items = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
-            'role_id' => $request->role_id,
-        ]);
+        if($request->role_id == 1) {
+            $items = Owner::create([
+                'name' => $request->name,
+                'email' => $request->email,
+                // 'password' => Hash::make($request->password),
+                'role_id' => $request->role_id,
+                'uid' => $request->uid
+            ]);
+        } else {
+            $items = User::create([
+                'name' => $request->name,
+                'email' => $request->email,
+                // 'password' => Hash::make($request->password),
+                'role_id' => $request->role_id,
+                'uid' => $request->uid
+            ]);
+        }
 
         return response()->json(['data' => $items]);
     }
 
     public function login(Request $request)
     {
-        $item = User::where('email', $request->email)->first();
+        $user = User::where('uid', $request->uid)->first();
 
-        if ($item) {
-            return response()->json(['data' => $item], 201);
+        if(!$user) {
+            $owner = Owner::where('uid', $request->uid)->first();
+        }
+
+        if ($user) {
+            return response()->json(['data' => $user], 201);
+        } else if ($owner) {
+            return response()->json(['data' => $owner], 201);
         } else {
             return response()->json(['message' => 'ユーザーが見当たりません'], 404);
         }
+
     }
 }

@@ -43,6 +43,7 @@ class CartController extends Controller
     public function destroy(Request $request)
     {
         $item = Cart::where('id', $request->id)->delete();
+
         if ($item) {
             return response()->json(['data' => 'カートから削除しました'], 201);
         } else {
@@ -50,5 +51,14 @@ class CartController extends Controller
         }
     }
 
-    
+    public function allDelete(Request $request)
+    {
+        $item = Cart::where('user_id', $request->id)->delete();
+
+        if ($item) {
+            return response()->json(['data' => 'カートから削除しました'], 201);
+        } else {
+            return response()->json(['message' => 'カートから削除できませんでした'], 404);
+        }
+    }
 }

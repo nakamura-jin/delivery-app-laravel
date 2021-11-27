@@ -4,14 +4,14 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
-use App\Models\User;
+use App\Models\Owner;
 use App\Models\Role;
 
-class UserController extends Controller
+class OwnerController extends Controller
 {
     public function index()
     {
-        $items = User::all();
+        $items = Owner::all();
 
         foreach ($items as $item) {
             $role = Role::where('id', $item->role_id)->first();
@@ -24,9 +24,9 @@ class UserController extends Controller
         ], 200);
     }
 
-    public function show($user)
+    public function show($owner)
     {
-        $item = User::find($user);
+        $item = Owner::find($owner);
 
         // $role = Role::where('id', $item->role_id )->first();
         // $item->role_name = $role->name;
@@ -47,7 +47,7 @@ class UserController extends Controller
             'role_id' => $request->role_id,
             'uid' => $request->uid
         ];
-        $item = User::find($id)->update($update);
+        $item = Owner::find($id)->update($update);
 
         if ($item) {
             return response()->json(['message' => '変更しました'], 201);
@@ -58,7 +58,7 @@ class UserController extends Controller
 
     public function destroy(Request $request)
     {
-        $item = User::where('id', $request->id)->delete();
+        $item = Owner::where('id', $request->id)->delete();
         if ($item) {
             return response()->json(['message' => 'ユーザーを削除しました'], 201);
         } else {
@@ -68,7 +68,7 @@ class UserController extends Controller
 
     public function userList()
     {
-        $items = User::where('role_id', '=', 3)->get();
+        $items = Owner::where('role_id', '=', 3)->get();
 
         foreach ($items as $item) {
             $role = Role::where('id', $item->role_id)->first();
