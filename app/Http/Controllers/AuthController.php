@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 use App\Models\Owner;
 
@@ -15,7 +14,6 @@ class AuthController extends Controller
         $validate = Validator::make($request->all(), [
             'name' => 'required',
             'email' => 'required|email',
-            // 'password' => 'required',
             'role_id' => 'required',
             'uid' => 'required'
         ]);
@@ -28,7 +26,6 @@ class AuthController extends Controller
             $items = Owner::create([
                 'name' => $request->name,
                 'email' => $request->email,
-                // 'password' => Hash::make($request->password),
                 'role_id' => $request->role_id,
                 'uid' => $request->uid
             ]);
@@ -36,7 +33,6 @@ class AuthController extends Controller
             $items = User::create([
                 'name' => $request->name,
                 'email' => $request->email,
-                // 'password' => Hash::make($request->password),
                 'role_id' => $request->role_id,
                 'uid' => $request->uid
             ]);

@@ -6,7 +6,6 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 use App\Models\User;
-use Illuminate\Support\Facades\Hash;
 use Database\Seeders\DatabaseSeeder;
 
 class UserTest extends TestCase
@@ -26,8 +25,7 @@ class UserTest extends TestCase
         $user = User::create([
             'name' => 'user',
             'email' => 'user@test.com',
-            'password' => Hash::make('password'),
-            'role_id' => 3
+            'role_id' => 3,
         ]);
         // $user = User::factory()->create();
 
@@ -36,7 +34,6 @@ class UserTest extends TestCase
         $response->assertJsonFragment([
             'name' => $user->name,
             'email' => $user->email,
-            'password' => $user->password,
             'role_id' => $user->role_id
         ]);
     }

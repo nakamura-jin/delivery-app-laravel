@@ -55,7 +55,7 @@ class OrderController extends Controller
             'display' => 1,
             'cooked' => 1,
             'date' => $request->date,
-            'time' => $request->time,
+            'time' => $request->time
         ]);
 
         event(new OrderCreated($order));
@@ -129,5 +129,31 @@ class OrderController extends Controller
         } else {
             return response()->json(['message' => '変更に失敗しました'], 404);
         }
+    }
+
+    public function myOrder(Request $request)
+    {
+        $items = Order::where('user_id', $request->id)->get();
+
+        foreach ($items as $item) {
+            $lists = [];
+            foreach ($item->menu_list as $id) {
+                $menu = Menu::where('id', $id['id'])->first();
+                $menu->quantity = $id[('quantity')];
+
+                array_push($lists, $menu);
+            }
+
+            $item->menu_list = $lists;
+
+            $user = User::where('id', $item->user_id)->first();
+            $item->user_name = $user->name;
+        }
+
+        return response()->json([
+            'data' => $items
+        ], 200);
+
+        return response()->json(['data' => $item], 200);
     }
 }

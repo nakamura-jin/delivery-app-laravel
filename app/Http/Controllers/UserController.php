@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 use App\Models\Role;
 
@@ -28,9 +27,6 @@ class UserController extends Controller
     {
         $item = User::find($user);
 
-        // $role = Role::where('id', $item->role_id )->first();
-        // $item->role_name = $role->name;
-
         if ($item) {
             return response()->json(['data' => $item], 201);
         } else {
@@ -43,7 +39,6 @@ class UserController extends Controller
         $update = [
             'name' => $request->name,
             'email' => $request->email,
-            'password' => Hash::make($request->password),
             'role_id' => $request->role_id,
             'uid' => $request->uid
         ];
@@ -64,19 +59,5 @@ class UserController extends Controller
         } else {
             return response()->json(['message' => 'ユーザを削除できませんでした'], 404);
         }
-    }
-
-    public function userList()
-    {
-        $items = User::where('role_id', '=', 3)->get();
-
-        foreach ($items as $item) {
-            $role = Role::where('id', $item->role_id)->first();
-            $item->role_name = $role->name;
-        }
-
-        return response()->json([
-            'data' => $items
-        ], 200);
     }
 }

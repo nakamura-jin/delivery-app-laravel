@@ -7,7 +7,7 @@ use App\Http\Controllers\MenuController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\OrderController;
-
+use App\Http\Controllers\SalesListController;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,15 +33,10 @@ Route::group(['prefix' => 'v1'], function() {
     Route::delete('/menu/{id}', [MenuController::class, 'destroy']);
 
     // user
-    // Route::get('/user_list', [UserController::class, 'userList']);
     Route::get('/user/{id}', [UserController::class, 'show']);
     Route::get('/user', [UserController::class, 'index']);
-    // Route::put('/user/{id}', [UserController::class, 'update']);
-
-    // Route::get('/member', [UserController::class, 'index']);
-    // Route::get('/member/{id}', [UserController::class, 'show']);
-    // Route::put('/member/{id}', [UserController::class, 'update']);
-    // Route::delete('/member/{id}', [UserController::class, 'destroy']);
+    Route::put('/user/{id}', [UserController::class, 'update']);
+    Route::delete('/user/{id}', [UserController::class, 'destroy']);
 
     // cart
     Route::get('/{id}/cart', [CartController::class, 'userCart']);
@@ -55,7 +50,13 @@ Route::group(['prefix' => 'v1'], function() {
     Route::put('/order/{id}', [OrderController::class, 'update']);
     Route::put('/order/list/{id}', [OrderController::class, 'listDelete']);
 
+    Route::get('/order/user/{id}', [OrderController::class, 'myOrder']);
     Route::put('/order/cooked/{id}', [OrderController::class, 'cooked']);
+
+    // salesList
+    Route::get('/sales_list', [SalesListController::class, 'index']);
+    Route::post('/sales_list', [SalesListController::class, 'store']);
+    Route::get('/sales_list/{created_at}', [SalesListController::class, 'show']);
 
 
 
