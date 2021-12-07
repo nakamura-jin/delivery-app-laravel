@@ -18,28 +18,20 @@ class UserTableSeeder extends Seeder
         $param = [
             'name' => 'admin',
             'email' => 'admin@test.com',
-            'password' => Hash::make('password'),
+            'uid' => Hash::make('7OuoFhraJtblFlhlb2DfP4XcK5i2'),
             'role_id' => 1
         ];
         $item = new User;
         $item->fill($param)->save();
 
         $param = [
-            'name' => 'staff',
-            'email' => 'staff@test.com',
-            'password' => Hash::make('password'),
+            'name' => 'member',
+            'email' => 'member@test.com',
+            'password' => Hash::make('BVrf7zWUESOsipuWHbNE4lhMnhE'),
             'role_id' => 2
         ];
         $item = new User;
         $item->fill($param)->save();
 
-        $param = [
-            'name' => 'user',
-            'email' => 'user@test.com',
-            'password' => Hash::make('password'),
-            'role_id' => 3
-        ];
-        $item = new User;
-        $item->fill($param)->save();
     }
 }

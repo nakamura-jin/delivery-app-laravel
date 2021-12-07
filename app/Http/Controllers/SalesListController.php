@@ -28,7 +28,6 @@ class SalesListController extends Controller
 
             $user = User::where('id', $item->user_id)->first();
             $item->user_name = $user->name;
-
         }
 
         return response()->json(['data' => $items]);
