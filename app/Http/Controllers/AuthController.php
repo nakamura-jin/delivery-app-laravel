@@ -22,7 +22,7 @@ class AuthController extends Controller
             return response()->json(['message' => '登録に失敗しました']);
         }
 
-        if($request->role_id == 1) {
+        if($request->role_id != 3) {
             $items = Owner::create([
                 'name' => $request->name,
                 'email' => $request->email,

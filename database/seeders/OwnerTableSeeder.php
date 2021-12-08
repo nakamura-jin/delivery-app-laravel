@@ -3,7 +3,6 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\Hash;
 use App\Models\Owner;
 
 class OwnerTableSeeder extends Seeder
@@ -19,7 +18,7 @@ class OwnerTableSeeder extends Seeder
             'id' => 1,
             'name' => 'admin',
             'email' => 'admin@test.com',
-            'uid' => Hash::make('7OuoFhraJtblFlhlb2DfP4XcK5i2'),
+            'uid' => '7OuoFhraJtblFlhlb2DfP4XcK5i2',
             'role_id' => 1
         ];
         $item = new Owner;
@@ -29,7 +28,7 @@ class OwnerTableSeeder extends Seeder
             'id' => 2,
             'name' => 'member',
             'email' => 'member@test.com',
-            'uid' => Hash::make('BVrf7zWUESOsipuWHbNE4lhMnhE'),
+            'uid' => 'BVrf7zWUESOsipuWHbNE4lhMnhE',
             'role_id' => 2
         ];
         $item = new Owner;

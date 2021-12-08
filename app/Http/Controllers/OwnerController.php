@@ -43,7 +43,6 @@ class OwnerController extends Controller
         $update = [
             'name' => $request->name,
             'email' => $request->email,
-            'password' => Hash::make($request->password),
             'role_id' => $request->role_id,
             'uid' => $request->uid
         ];
