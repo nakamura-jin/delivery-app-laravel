@@ -15,6 +15,7 @@ class MenuTableSeeder extends Seeder
     public function run()
     {
         $param = [
+            'id' => 1,
             'name' => '焼き鳥',
             'discription' => '当店自慢の一品',
             'price' => 200,

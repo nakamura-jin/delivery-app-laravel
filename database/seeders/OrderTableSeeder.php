@@ -18,6 +18,7 @@ class OrderTableSeeder extends Seeder
     public function run()
     {
         $param = [
+            'id' => 1,
             'user_id' => User::pluck('id')->random(),
             'menu_list' => ['id' => Menu::pluck('id')->first(), 'quantity' => 1],
             'display' => 1,

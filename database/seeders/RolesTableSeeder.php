@@ -15,18 +15,21 @@ class RolesTableSeeder extends Seeder
     public function run()
     {
         $param = [
+            'id' => 1,
             'name' => 'admin',
         ];
         $role = new Role;
         $role->fill($param)->save();
 
         $param = [
+            'id' => 2,
             'name' => 'staff',
         ];
         $role = new Role;
         $role->fill($param)->save();
 
         $param = [
+            'id' => 3,
             'name' => 'user',
         ];
         $role = new Role;

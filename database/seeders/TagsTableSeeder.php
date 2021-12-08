@@ -16,30 +16,35 @@ class TagsTableSeeder extends Seeder
     public function run()
     {
         $param = [
+            'id' => 1,
             'name' => '肉料理'
         ];
         $item = new Tag;
         $item->fill($param)->save();
 
         $param = [
+            'id' => 2,
             'name' => '揚げ物'
         ];
         $item = new Tag;
         $item->fill($param)->save();
 
         $param = [
+            'id' => 3,
             'name' => '野菜料理'
         ];
         $item = new Tag;
         $item->fill($param)->save();
 
         $param = [
+            'id' => 4,
             'name' => '定番おつまみ'
         ];
         $item = new Tag;
         $item->fill($param)->save();
 
         $param = [
+            'id' => 5,
             'name' => 'ごはんもの'
         ];
         $item = new Tag;

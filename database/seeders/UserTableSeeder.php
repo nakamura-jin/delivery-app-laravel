@@ -16,6 +16,7 @@ class UserTableSeeder extends Seeder
     public function run()
     {
         $param = [
+            'id' => 1,
             'name' => 'admin',
             'email' => 'admin@test.com',
             'uid' => Hash::make('7OuoFhraJtblFlhlb2DfP4XcK5i2'),
@@ -25,6 +26,7 @@ class UserTableSeeder extends Seeder
         $item->fill($param)->save();
 
         $param = [
+            'id' => 2,
             'name' => 'member',
             'email' => 'member@test.com',
             'uid' => Hash::make('BVrf7zWUESOsipuWHbNE4lhMnhE'),
